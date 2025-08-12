@@ -157,3 +157,82 @@ a.button {
   --bg: #0b1220;
   --bg-rgb: 11, 18, 32;
 }
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+}
+
+.social-icons {
+  display: flex;
+  gap: 16px;
+}
+
+.social-icons a {
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.social-icons a:hover {
+  color: var(--accent);
+}
+
+.social-icons svg {
+  width: 24px;
+  height: 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header stays fixed height and doesn't scroll */
+.card-header {
+  flex: 0 0 auto;
+  padding-bottom: 8px;
+}
+
+/* Body scrolls when content exceeds max height */
+.card-body {
+  position: relative;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* Add the fade overlay */
+.card-body::after {
+  content: "";
+  position: sticky; /* stays at bottom when scrolling */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px; /* fade height */
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--bg));
+  z-index: 1;
+}
+
+/* Dark mode fade */
+:root[data-theme="dark"] .card-body::after {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg));
+}
+
+/* Footer sticks to the bottom */
+.card-actions {
+  flex: 0 0 auto;
+  margin-top: auto;
+}
+
+/* Limit total card height on larger screens */
+/* @media (min-width: 800px) {
+  .card {
+    max-height: 380px; /* adjust to taste */
+  }
+} */
