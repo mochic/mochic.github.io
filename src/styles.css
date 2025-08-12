@@ -121,3 +121,39 @@ a.button {
     display: none;
   }
 }
+
+/* Publications card layout stays normal (no flex forcing) */
+.pubs-card .scrollable {
+  max-height: 100px; /* set your scrollable area height */
+  overflow-y: auto;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding-right: 6px; /* space for scrollbar */
+  position: relative; /* so we can position the fade overlay */
+}
+
+/* Fade effect at bottom */
+.pubs-card .scrollable::after {
+  content: "";
+  position: sticky; /* sticks to the bottom of the scroll area */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 32px; /* height of fade area */
+  pointer-events: none; /* clicks pass through */
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--bg-rgb), 0) 0%,
+    var(--bg) 100%
+  );
+}
+
+/* Vars for light/dark theme backgrounds */
+:root {
+  --bg: #ffffff;
+  --bg-rgb: 255, 255, 255;
+}
+:root[data-theme="dark"] {
+  --bg: #0b1220;
+  --bg-rgb: 11, 18, 32;
+}

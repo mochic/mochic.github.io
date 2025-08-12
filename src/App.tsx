@@ -89,17 +89,76 @@ export default function App() {
         </section>
 
         {/* PUBLICATIONS */}
-        <section id="publications" className="card span-4">
-          <h2>Publications</h2>
-          <p>
-            Selected research & contributions (2014–2025). Add a short list or
-            link to a publications page.
-          </p>
-          <p>
-            <a className="button" href="/publications.html">
-              View Publications
+        {/* PUBLICATIONS (scrollable list, static button) */}
+        <section id="publications" className="card span-4 pubs-card">
+          <h2>Selected Publications</h2>
+
+          <div
+            className="scrollable"
+            role="region"
+            aria-label="Selected publications"
+            tabIndex={0}
+          >
+            <ul className="pubs">
+              <li className="pub-item">
+                <strong>
+                  Survey of spiking in the mouse visual system reveals
+                  functional hierarchy
+                </strong>
+                <br />
+                <span className="pub-venue">Nature</span> ·{" "}
+                <span className="pub-date">Apr 2021</span>
+              </li>
+              <li className="pub-item">
+                <strong>
+                  SHIELD: Skull-shaped hemispheric implants enabling large-scale
+                  electrophysiology datasets
+                </strong>
+                <br />
+                <span className="pub-venue">Neuron</span> ·{" "}
+                <span className="pub-date">Jul 2024</span>
+              </li>
+              <li className="pub-item">
+                <strong>
+                  Neurophysiological differentiation across mouse visual brain
+                  areas and timescales
+                </strong>
+                <br />
+                <span className="pub-venue">Front. Comp. Neurosci.</span> ·{" "}
+                <span className="pub-date">Mar 2023</span>
+              </li>
+              <li className="pub-item">
+                <strong>
+                  Learning, Motivation, and Perception in Transgenic Mouse Lines
+                </strong>
+                <br />
+                <span className="pub-venue">
+                  Front. Behav. Neurosci.
+                </span> · <span className="pub-date">Jun 2020</span>
+              </li>
+              <li className="pub-item">
+                <strong>
+                  Stimulus novelty uncovers coding diversity in visual cortical
+                  circuits
+                </strong>{" "}
+                (preprint)
+                <br />
+                <span className="pub-venue">bioRxiv</span> ·{" "}
+                <span className="pub-date">Feb 2023</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="pubs-actions">
+            <a
+              className="button"
+              href="https://www.researchgate.net/scientific-contributions/Chris-Mochizuki-2147168242"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Additional contributions
             </a>
-          </p>
+          </div>
         </section>
 
         {/* CONTACT */}
