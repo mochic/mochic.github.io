@@ -5,5 +5,5 @@ Source for mochic pwa.
 Local development server
 
 ```bash
-make local
+npm run build && npm run preview -- --host
 ```

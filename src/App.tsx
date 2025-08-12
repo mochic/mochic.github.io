@@ -25,9 +25,6 @@ export default function App() {
           <a href="#publications">Publications</a>
           <a href="#contact">Contact</a>
         </nav>
-        {/* <button className="toggle" onClick={toggle} aria-label="Toggle theme">
-          {theme === "dark" ? "🌙 Dark" : "☀️ Light"}
-        </button> */}
         <button
           className="toggle"
           onClick={toggle}
@@ -71,10 +68,13 @@ export default function App() {
               GitHub
             </a>{" "}
             ·{" "}
-            <a href="https://mochic.github.io" target="_blank" rel="noreferrer">
-              Site
-            </a>{" "}
-            · <a href="mailto:mochic808@gmail.com">Email</a>
+            <a
+              href="https://www.linkedin.com/in/christopher-mochizuki-9691267b/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn
+            </a>
           </p>
         </section>
 
