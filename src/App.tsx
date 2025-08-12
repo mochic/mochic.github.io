@@ -25,8 +25,18 @@ export default function App() {
           <a href="#publications">Publications</a>
           <a href="#contact">Contact</a>
         </nav>
-        <button className="toggle" onClick={toggle} aria-label="Toggle theme">
+        {/* <button className="toggle" onClick={toggle} aria-label="Toggle theme">
           {theme === "dark" ? "🌙 Dark" : "☀️ Light"}
+        </button> */}
+        <button
+          className="toggle"
+          onClick={toggle}
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+        >
+          {theme === "dark" ? "🌙" : "☀️"}
+          <span className="toggle-text">
+            {theme === "dark" ? " Dark" : " Light"}
+          </span>
         </button>
       </header>
 
@@ -103,8 +113,7 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        © {new Date().getFullYear()} Christopher Mochizuki · Installable PWA ·{" "}
-        {theme} mode
+        © {new Date().getFullYear()} Christopher Mochizuki · Installable PWA
       </footer>
     </div>
   );

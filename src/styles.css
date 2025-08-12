@@ -111,3 +111,13 @@ a.button {
     grid-column: span 4;
   }
 }
+:root[data-theme="dark"] .toggle {
+  color: #fff;
+}
+
+/* Hide the text label on small–medium devices, keep the icon */
+@media (max-width: 768px) {
+  .toggle-text {
+    display: none;
+  }
+}
