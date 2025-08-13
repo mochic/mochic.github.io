@@ -12,8 +12,110 @@ function useTheme() {
   return { theme, setTheme };
 }
 
+// function PdfModal({
+//   open,
+//   onClose,
+//   src,
+//   title = "Document",
+// }: {
+//   open: boolean;
+//   onClose: () => void;
+//   src: string;
+//   title?: string;
+// }) {
+//   useEffect(() => {
+//     const onKey = (e: KeyboardEvent) => {
+//       if (e.key === "Escape") onClose();
+//     };
+//     if (open) window.addEventListener("keydown", onKey);
+//     return () => window.removeEventListener("keydown", onKey);
+//   }, [open, onClose]);
+
+//   if (!open) return null;
+//   return (
+//     <div className="modal" role="dialog" aria-modal="true" aria-label={title}>
+//       <div className="modal-chrome">
+//         <div className="modal-title">{title}</div>
+//         <button
+//           className="modal-close"
+//           onClick={onClose}
+//           aria-label="Close PDF"
+//         >
+//           ✕
+//         </button>
+//       </div>
+//       {/* Use iframe for broad support; put the PDF in /public */}
+//       <iframe className="modal-frame" src={src} title={title} />
+//     </div>
+//   );
+// }
+
+function PdfModal({
+  open,
+  onClose,
+  src,
+  title = "PDF Viewer",
+}: {
+  open: boolean;
+  onClose: () => void;
+  src: string;
+  title?: string;
+}) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    if (open) window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="modal" role="dialog" aria-modal="true" aria-label={title}>
+      <div className="modal-chrome">
+        <div className="modal-title">{title}</div>
+
+        {/* Action buttons (same styling as card actions) */}
+        <div className="modal-actions">
+          <a
+            className="button"
+            href={src}
+            download
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Download PDF"
+            style={{
+              marginRight: 10,
+              fontSize: 13.33,
+            }}
+          >
+            Download
+          </a>
+          <button
+            className="modal-close"
+            onClick={onClose}
+            aria-label="Close PDF"
+          >
+            ✕
+          </button>
+          {/* <button
+            className="button"
+            onClick={onClose}
+            type="button"
+            aria-label="Close PDF"
+          >
+            Close
+          </button> */}
+        </div>
+      </div>
+
+      <iframe className="modal-frame" src={src} title={title} />
+    </div>
+  );
+}
+
 export default function App() {
   const { theme, setTheme } = useTheme();
+  const [pdfOpen, setPdfOpen] = useState(false);
   const toggle = () => setTheme(theme === "light" ? "dark" : "light");
 
   return (
@@ -62,7 +164,7 @@ export default function App() {
           </div>
           <div className="card-actions">
             {/* <ResumeButton /> */}
-            <a
+            {/* <a
               className="button"
               href="/Christopher_Mochizuki_Resume.pdf"
               target="_blank"
@@ -70,7 +172,15 @@ export default function App() {
               aria-label="View Resume"
             >
               View Resume
-            </a>
+            </a> */}
+            {/* Open PDF inside modal so it’s closable */}
+            <button
+              className="button"
+              aria-label="View Resume"
+              onClick={() => setPdfOpen(true)}
+            >
+              View Resume (PDF)
+            </button>
           </div>
           {/* <a
             className="button"
@@ -360,6 +470,13 @@ export default function App() {
           </a>
         </div>
       </footer>
+      {/* Modal lives at root so it overlays everything */}
+      <PdfModal
+        open={pdfOpen}
+        onClose={() => setPdfOpen(false)}
+        src="/Christopher_Mochizuki_Resume.pdf"
+        // title="Resume"
+      />
     </div>
   );
 }

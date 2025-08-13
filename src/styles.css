@@ -230,42 +230,86 @@ a.button {
   margin-top: auto;
 }
 
+/* Modal overlay */
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(4px);
   display: grid;
-  place-items: center;
-  z-index: 50;
-  padding: 24px;
+  grid-template-rows: auto 1fr;
+  z-index: 1000;
 }
-.modal__content {
-  width: min(1100px, 100%);
-  height: min(90vh, 100%);
-  background: var(--bg);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+
+/* Top bar */
+.modal-chrome {
   display: flex;
-  flex-direction: column;
-}
-.modal__bar {
-  display: flex;
-  gap: 8px;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid var(--border);
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
   background: var(--card);
+  border-bottom: 1px solid var(--border);
 }
-.modal__frame {
-  flex: 1 1 auto;
-  width: 100%;
-  border: 0;
-  background: #fff;
+.modal-title {
+  font-weight: 600;
 }
-.button.ghost {
-  background: transparent;
-  color: var(--text);
+.modal-close {
   border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
 }
+
+/* PDF area */
+.modal-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: var(--bg);
+}
+
+/* Prevent background scroll while modal open */
+.modal ~ * {
+  /* no-op: handled by fixed overlay; if needed, add body.no-scroll { overflow: hidden } logic */
+}
+
+/* Optional: on small screens, make the bar sticky and increase hit targets */
+@media (max-width: 768px) {
+  .modal-chrome {
+    position: sticky;
+    top: 0;
+  }
+  .modal-close {
+    padding: 10px 14px;
+  }
+}
+
+/* .button {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+} */
+
+.button {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* .button:hover {
+  background: var(--accent-hover);
+} */
