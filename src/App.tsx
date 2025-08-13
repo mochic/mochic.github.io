@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 // import { ResumeButton } from "./ResumeButton";
+import PDFViewer from "./PDFViewer";
 
 function useTheme() {
   const [theme, setTheme] = useState<"light" | "dark">(
@@ -109,12 +110,15 @@ function PdfModal({
       </div>
 
       {/* <iframe className="modal-frame" src={src} title={title} /> */}
-      <embed
+      {/* <embed
         className="modal-frame"
         src={src}
         type="application/pdf"
         title={title}
         // onError={() => setMode('gview')}
+      /> */}
+      <PDFViewer
+        url={`${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`}
       />
     </div>
   );
