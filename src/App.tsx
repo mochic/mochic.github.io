@@ -207,7 +207,8 @@ export default function App() {
             <button
               className="button"
               aria-label="View Resume"
-              onClick={() => setPdfOpen(true)}
+              // onClick={() => setPdfOpen(true)}
+              onClick={() => window.open(pdfUrl, "_blank")}
             >
               View Resume (PDF)
             </button>
