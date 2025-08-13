@@ -109,17 +109,17 @@ function PdfModal({
         </div>
       </div>
 
-      {/* <iframe className="modal-frame" src={src} title={title} /> */}
-      {/* <embed
+      <iframe className="modal-frame" src={src} title={title} />
+      <embed
         className="modal-frame"
         src={src}
         type="application/pdf"
         title={title}
         // onError={() => setMode('gview')}
-      /> */}
-      <PDFViewer
-        url={`${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`}
       />
+      {/* <PDFViewer
+        url={`${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`}
+      /> */}
     </div>
   );
 }
