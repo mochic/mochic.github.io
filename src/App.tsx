@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+// import { ResumeButton } from "./ResumeButton";
 
 function useTheme() {
   const [theme, setTheme] = useState<"light" | "dark">(
@@ -21,8 +22,8 @@ export default function App() {
         <div className="brand">Christopher Mochizuki</div>
         <nav className="nav" aria-label="Primary">
           <a href="#about">About</a>
-          <a href="#projects">Projects</a>
           <a href="#publications">Publications</a>
+          <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
         </nav>
         <button
@@ -60,15 +61,26 @@ export default function App() {
             </p>
           </div>
           <div className="card-actions">
+            {/* <ResumeButton /> */}
             <a
               className="button"
               href="/Christopher_Mochizuki_Resume.pdf"
               target="_blank"
               rel="noreferrer"
+              aria-label="View Resume"
             >
-              View Resume (PDF)
+              View Resume
             </a>
           </div>
+          {/* <a
+            className="button"
+            href="/Christopher_Mochizuki_Resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="View Resume"
+          >
+            View Resume
+          </a> */}
         </section>
         {/* <section id="about" className="card span-6">
           <h1>Software Engineer · Data & AI</h1>
@@ -166,16 +178,14 @@ export default function App() {
           <ul>
             <li>
               <a
-                href="https://https://mochic.github.io/"
+                href="https://mochic.github.io/"
                 target="_blank"
                 rel="noreferrer"
               >
                 This website • Installable PWA
               </a>
             </li>
-            <li>Resume Tailor (OpenAI, agents, PDF gen)</li>
-            <li>Data Pipelines for Neuroscience Experiments</li>
-            <li>Dashboarding & ETL modernization (Mypy, Pydantic)</li>
+            <li>Work in progress...</li>
           </ul>
         </section>
 
@@ -266,7 +276,7 @@ export default function App() {
         <span>© {new Date().getFullYear()} Christopher Mochizuki</span>
         <div className="social-icons">
           <a
-            href="https://https://mochic.github.io/"
+            href="https://mochic.github.io/"
             target="_blank"
             rel="noreferrer"
             aria-label="Website"

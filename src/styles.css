@@ -230,9 +230,42 @@ a.button {
   margin-top: auto;
 }
 
-/* Limit total card height on larger screens */
-/* @media (min-width: 800px) {
-  .card {
-    max-height: 380px; /* adjust to taste */
-  }
-} */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: grid;
+  place-items: center;
+  z-index: 50;
+  padding: 24px;
+}
+.modal__content {
+  width: min(1100px, 100%);
+  height: min(90vh, 100%);
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.modal__bar {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+.modal__frame {
+  flex: 1 1 auto;
+  width: 100%;
+  border: 0;
+  background: #fff;
+}
+.button.ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
