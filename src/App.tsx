@@ -108,7 +108,14 @@ function PdfModal({
         </div>
       </div>
 
-      <iframe className="modal-frame" src={src} title={title} />
+      {/* <iframe className="modal-frame" src={src} title={title} /> */}
+      <embed
+        className="modal-frame"
+        src={src}
+        type="application/pdf"
+        title={title}
+        // onError={() => setMode('gview')}
+      />
     </div>
   );
 }
@@ -117,6 +124,8 @@ export default function App() {
   const { theme, setTheme } = useTheme();
   const [pdfOpen, setPdfOpen] = useState(false);
   const toggle = () => setTheme(theme === "light" ? "dark" : "light");
+
+  const pdfUrl = `${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`;
 
   return (
     <div className="container">
@@ -474,7 +483,7 @@ export default function App() {
       <PdfModal
         open={pdfOpen}
         onClose={() => setPdfOpen(false)}
-        src="/Christopher_Mochizuki_Resume.pdf"
+        src={pdfUrl}
         // title="Resume"
       />
     </div>
