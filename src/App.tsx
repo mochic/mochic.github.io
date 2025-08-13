@@ -109,14 +109,31 @@ function PdfModal({
         </div>
       </div>
 
-      <iframe className="modal-frame" src={src} title={title} />
+      {/* <iframe className="modal-frame" src={src} title={title} />
       <embed
         className="modal-frame"
         src={src}
         type="application/pdf"
         title={title}
         // onError={() => setMode('gview')}
-      />
+      /> */}
+      <div
+        style={{
+          overflowY: "auto",
+          WebkitOverflowScrolling: "touch", // smooth scrolling on iOS
+          height: "100%", // fill modal content height
+        }}
+      >
+        <embed
+          src={`${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`}
+          type="application/pdf"
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "block",
+          }}
+        />
+      </div>
       {/* <PDFViewer
         url={`${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`}
       /> */}
