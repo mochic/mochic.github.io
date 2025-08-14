@@ -33,7 +33,7 @@ export default defineConfig({
         clientsClaim: true,
         skipWaiting: true,
         cleanupOutdatedCaches: true,
-        // end settings
+        // other settings
         navigateFallback: "/index.html",
         runtimeCaching: [
           {
