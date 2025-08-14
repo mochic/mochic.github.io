@@ -62,11 +62,23 @@ function PdfModal({
   src: string;
   title?: string;
 }) {
+  // useEffect(() => {
+  //   const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+  //   if (open) window.addEventListener("keydown", onKey);
+  //   return () => window.removeEventListener("keydown", onKey);
+  // }, [open, onClose]);
+
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    if (open) window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
+    if (!open) return;
+    // lock body scroll
+    const prev = document.body.style.overflow;
+    document.body.classList.add("no-scroll");
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.classList.remove("no-scroll");
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
 
   if (!open) return null;
 
@@ -221,16 +233,26 @@ export default function App() {
               View Resume
             </a> */}
             {/* Open PDF inside modal so it’s closable */}
-            <button
+            {/* <button
               className="button"
               aria-label="View Resume"
               onClick={() => setPdfOpen(true)}
               // onClick={() => window.open(pdfUrl, "_blank")}
             >
               View Resume (PDF)
-            </button>
+            </button> */}
+            <a
+              className="button"
+              // href={pdfUrl}
+              href="/Christopher_Mochizuki_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              // rel="noreferrer"
+            >
+              View Resume (PDF)
+            </a>
           </div>
-          <a
+          {/* <a
             className="button"
             // href={pdfUrl}
             href="/Christopher_Mochizuki_Resume.pdf"
@@ -239,14 +261,14 @@ export default function App() {
             // rel="noreferrer"
           >
             View Resume
-          </a>
-          <a
+          </a> */}
+          {/* <a
             className="button secondary"
             href="/Christopher_Mochizuki_Resume.pdf"
             download
           >
             Download
-          </a>
+          </a> */}
           {/* <a
             className="button"
             href="/Christopher_Mochizuki_Resume.pdf"
