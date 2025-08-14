@@ -29,10 +29,11 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // ensure new SW takes control ASAP for iOS
+        // settings to ensure new SW takes control ASAP for iOS
         clientsClaim: true,
         skipWaiting: true,
         cleanupOutdatedCaches: true,
+        // end settings
         navigateFallback: "/index.html",
         runtimeCaching: [
           {
