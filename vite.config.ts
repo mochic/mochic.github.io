@@ -40,6 +40,11 @@ export default defineConfig({
             },
           },
         ],
+        // Don’t fallback for PDFs (or anything with an extension):
+        navigateFallbackDenylist: [
+          /\.pdf$/i,
+          /\.[^/]+$/i, // optional: denies any URL with a file extension
+        ],
       },
     }),
   ],

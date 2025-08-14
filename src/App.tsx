@@ -109,8 +109,8 @@ function PdfModal({
         </div>
       </div>
 
-      {/* <iframe className="modal-frame" src={src} title={title} />
-      <embed
+      {/* <iframe className="modal-frame" src={src} title={title} /> */}
+      {/* <embed
         className="modal-frame"
         src={src}
         type="application/pdf"
@@ -124,7 +124,7 @@ function PdfModal({
           height: "100%", // fill modal content height
         }}
       >
-        <embed
+        {/* <embed
           src={`${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`}
           type="application/pdf"
           style={{
@@ -132,8 +132,25 @@ function PdfModal({
             height: "100%",
             display: "block",
           }}
-        />
+        /> */}
+        <iframe className="modal-frame" src={src} title={title} />
       </div>
+      {/* <a
+        className="button"
+        href="/Christopher_Mochizuki_Resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        View Resume
+      </a>
+      <a
+        className="button secondary"
+        href="/Christopher_Mochizuki_Resume.pdf"
+        download
+      >
+        Download
+      </a> */}
+
       {/* <PDFViewer
         url={`${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`}
       /> */}
@@ -207,12 +224,29 @@ export default function App() {
             <button
               className="button"
               aria-label="View Resume"
-              // onClick={() => setPdfOpen(true)}
-              onClick={() => window.open(pdfUrl, "_blank")}
+              onClick={() => setPdfOpen(true)}
+              // onClick={() => window.open(pdfUrl, "_blank")}
             >
               View Resume (PDF)
             </button>
           </div>
+          <a
+            className="button"
+            // href={pdfUrl}
+            href="/Christopher_Mochizuki_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            // rel="noreferrer"
+          >
+            View Resume
+          </a>
+          <a
+            className="button secondary"
+            href="/Christopher_Mochizuki_Resume.pdf"
+            download
+          >
+            Download
+          </a>
           {/* <a
             className="button"
             href="/Christopher_Mochizuki_Resume.pdf"
