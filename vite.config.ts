@@ -29,6 +29,7 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // ensure new SW takes control ASAP for iOS
         clientsClaim: true,
         skipWaiting: true,
         cleanupOutdatedCaches: true,
