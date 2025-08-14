@@ -203,7 +203,7 @@ export default function App() {
         {/* HERO / ABOUT */}
         <section id="about" className="card span-6">
           <div className="card-header">
-            <h1>Software Engineer · Data & AI</h1>
+            <h1>Software Engineer · Data & Automation</h1>
           </div>
           <div
             className="card-body scrollable"
@@ -375,11 +375,11 @@ export default function App() {
           <ul>
             <li>
               <a
-                href="https://mochic.github.io/"
+                href="https://github.com/mochic/mochic.github.io"
                 target="_blank"
                 rel="noreferrer"
               >
-                This website • Installable PWA
+                mochic.github.io • Personal site PWA
               </a>
             </li>
             <li>Work in progress...</li>
