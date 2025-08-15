@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-// import { ResumeButton } from "./ResumeButton";
-// import PDFViewer from "./PDFViewer";
 
 function useTheme() {
   const [theme, setTheme] = useState<"light" | "dark">(
@@ -13,169 +11,11 @@ function useTheme() {
   return { theme, setTheme };
 }
 
-// function PdfModal({
-//   open,
-//   onClose,
-//   src,
-//   title = "Document",
-// }: {
-//   open: boolean;
-//   onClose: () => void;
-//   src: string;
-//   title?: string;
-// }) {
-//   useEffect(() => {
-//     const onKey = (e: KeyboardEvent) => {
-//       if (e.key === "Escape") onClose();
-//     };
-//     if (open) window.addEventListener("keydown", onKey);
-//     return () => window.removeEventListener("keydown", onKey);
-//   }, [open, onClose]);
-
-//   if (!open) return null;
-//   return (
-//     <div className="modal" role="dialog" aria-modal="true" aria-label={title}>
-//       <div className="modal-chrome">
-//         <div className="modal-title">{title}</div>
-//         <button
-//           className="modal-close"
-//           onClick={onClose}
-//           aria-label="Close PDF"
-//         >
-//           ✕
-//         </button>
-//       </div>
-//       {/* Use iframe for broad support; put the PDF in /public */}
-//       <iframe className="modal-frame" src={src} title={title} />
-//     </div>
-//   );
-// }
-
-function PdfModal({
-  open,
-  onClose,
-  src,
-  title = "PDF Viewer",
-}: {
-  open: boolean;
-  onClose: () => void;
-  src: string;
-  title?: string;
-}) {
-  // useEffect(() => {
-  //   const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-  //   if (open) window.addEventListener("keydown", onKey);
-  //   return () => window.removeEventListener("keydown", onKey);
-  // }, [open, onClose]);
-
-  useEffect(() => {
-    if (!open) return;
-    // lock body scroll
-    const prev = document.body.style.overflow;
-    document.body.classList.add("no-scroll");
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.classList.remove("no-scroll");
-      document.body.style.overflow = prev;
-    };
-  }, [open]);
-
-  if (!open) return null;
-
-  return (
-    <div className="modal" role="dialog" aria-modal="true" aria-label={title}>
-      <div className="modal-chrome">
-        <div className="modal-title">{title}</div>
-
-        {/* Action buttons (same styling as card actions) */}
-        <div className="modal-actions">
-          <a
-            className="button"
-            href={src}
-            download
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Download PDF"
-            style={{
-              marginRight: 10,
-              fontSize: 13.33,
-            }}
-          >
-            Download
-          </a>
-          <button
-            className="modal-close"
-            onClick={onClose}
-            aria-label="Close PDF"
-          >
-            ✕
-          </button>
-          {/* <button
-            className="button"
-            onClick={onClose}
-            type="button"
-            aria-label="Close PDF"
-          >
-            Close
-          </button> */}
-        </div>
-      </div>
-
-      {/* <iframe className="modal-frame" src={src} title={title} /> */}
-      {/* <embed
-        className="modal-frame"
-        src={src}
-        type="application/pdf"
-        title={title}
-        // onError={() => setMode('gview')}
-      /> */}
-      <div
-        style={{
-          overflowY: "auto",
-          WebkitOverflowScrolling: "touch", // smooth scrolling on iOS
-          height: "100%", // fill modal content height
-        }}
-      >
-        {/* <embed
-          src={`${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`}
-          type="application/pdf"
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "block",
-          }}
-        /> */}
-        <iframe className="modal-frame" src={src} title={title} />
-      </div>
-      {/* <a
-        className="button"
-        href="/Christopher_Mochizuki_Resume.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        View Resume
-      </a>
-      <a
-        className="button secondary"
-        href="/Christopher_Mochizuki_Resume.pdf"
-        download
-      >
-        Download
-      </a> */}
-
-      {/* <PDFViewer
-        url={`${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`}
-      /> */}
-    </div>
-  );
-}
-
 export default function App() {
   const { theme, setTheme } = useTheme();
-  const [pdfOpen, setPdfOpen] = useState(false);
   const toggle = () => setTheme(theme === "light" ? "dark" : "light");
 
-  const pdfUrl = `${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`;
+  // const pdfUrl = `${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`;
 
   return (
     <div className="container">
@@ -222,29 +62,12 @@ export default function App() {
             </p>
           </div>
           <div className="card-actions">
-            {/* <ResumeButton /> */}
-            {/* <a
-              className="button"
-              href="/Christopher_Mochizuki_Resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="View Resume"
-            >
-              View Resume
-            </a> */}
-            {/* Open PDF inside modal so it’s closable */}
-            {/* <button
-              className="button"
-              aria-label="View Resume"
-              onClick={() => setPdfOpen(true)}
-              // onClick={() => window.open(pdfUrl, "_blank")}
-            >
-              View Resume (PDF)
-            </button> */}
             <a
               className="button"
-              // href={pdfUrl}
-              href="/Christopher_Mochizuki_Resume.pdf"
+              href={`${
+                import.meta.env.BASE_URL
+              }Christopher_Mochizuki_Resume.pdf`}
+              // href="/Christopher_Mochizuki_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               // rel="noreferrer"
@@ -252,50 +75,7 @@ export default function App() {
               View Resume (PDF)
             </a>
           </div>
-          {/* <a
-            className="button"
-            // href={pdfUrl}
-            href="/Christopher_Mochizuki_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            // rel="noreferrer"
-          >
-            View Resume
-          </a> */}
-          {/* <a
-            className="button secondary"
-            href="/Christopher_Mochizuki_Resume.pdf"
-            download
-          >
-            Download
-          </a> */}
-          {/* <a
-            className="button"
-            href="/Christopher_Mochizuki_Resume.pdf"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="View Resume"
-          >
-            View Resume
-          </a> */}
         </section>
-        {/* <section id="about" className="card span-6">
-          <h1>Software Engineer · Data & AI</h1>
-          <p>
-            I build production-grade systems, data pipelines, and automation for
-            research and AI/ML workloads. Focused on Python, modern web, and
-            cloud data platforms.
-          </p>
-          <a
-            className="button"
-            href="/Christopher_Mochizuki_Resume.pdf"
-            target="_blank"
-            rel="noreferrer"
-          >
-            View Resume (PDF)
-          </a>
-        </section> */}
-
         {/* QUICK LINKS */}
         <section className="card span-6">
           <div className="card-header">
@@ -305,7 +85,7 @@ export default function App() {
             className="card-body scrollable"
             role="region"
             aria-label="Selected publications"
-            tabIndex={0}
+            // tabIndex={0}
           >
             <ul className="pubs">
               <li className="pub-item">
@@ -385,79 +165,6 @@ export default function App() {
             <li>Work in progress...</li>
           </ul>
         </section>
-
-        {/* PUBLICATIONS */}
-        {/* PUBLICATIONS (scrollable list, static button) */}
-        {/* <section id="publications" className="card span-4 pubs-card">
-          <h2>Selected Publications</h2>
-
-          <div
-            className="scrollable"
-            role="region"
-            aria-label="Selected publications"
-            tabIndex={0}
-          >
-            <ul className="pubs">
-              <li className="pub-item">
-                <strong>
-                  Survey of spiking in the mouse visual system reveals
-                  functional hierarchy
-                </strong>
-                <br />
-                <span className="pub-venue">Nature</span> ·{" "}
-                <span className="pub-date">Apr 2021</span>
-              </li>
-              <li className="pub-item">
-                <strong>
-                  SHIELD: Skull-shaped hemispheric implants enabling large-scale
-                  electrophysiology datasets
-                </strong>
-                <br />
-                <span className="pub-venue">Neuron</span> ·{" "}
-                <span className="pub-date">Jul 2024</span>
-              </li>
-              <li className="pub-item">
-                <strong>
-                  Neurophysiological differentiation across mouse visual brain
-                  areas and timescales
-                </strong>
-                <br />
-                <span className="pub-venue">Front. Comp. Neurosci.</span> ·{" "}
-                <span className="pub-date">Mar 2023</span>
-              </li>
-              <li className="pub-item">
-                <strong>
-                  Learning, Motivation, and Perception in Transgenic Mouse Lines
-                </strong>
-                <br />
-                <span className="pub-venue">
-                  Front. Behav. Neurosci.
-                </span> · <span className="pub-date">Jun 2020</span>
-              </li>
-              <li className="pub-item">
-                <strong>
-                  Stimulus novelty uncovers coding diversity in visual cortical
-                  circuits
-                </strong>{" "}
-                (preprint)
-                <br />
-                <span className="pub-venue">bioRxiv</span> ·{" "}
-                <span className="pub-date">Feb 2023</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="pubs-actions">
-            <a
-              className="button"
-              href="https://www.researchgate.net/scientific-contributions/Chris-Mochizuki-2147168242"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Additional contributions
-            </a>
-          </div>
-        </section> */}
 
         {/* CONTACT */}
         <section id="contact" className="card span-4">
@@ -557,13 +264,6 @@ export default function App() {
           </a>
         </div>
       </footer>
-      {/* Modal lives at root so it overlays everything */}
-      <PdfModal
-        open={pdfOpen}
-        onClose={() => setPdfOpen(false)}
-        src={pdfUrl}
-        // title="Resume"
-      />
     </div>
   );
 }
