@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import SectionCard from "./SectionCard";
 
 function useTheme() {
   const [theme, setTheme] = useState<"light" | "dark">(
@@ -11,21 +12,44 @@ function useTheme() {
   return { theme, setTheme };
 }
 
+const FooterIconLink = ({
+  href,
+  label,
+  pathData,
+}: {
+  href: string;
+  label: string;
+  pathData: string;
+}) => (
+  <a href={href} target="_blank" rel="noreferrer" aria-label={label}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path d={pathData} />
+    </svg>
+  </a>
+);
+
 export default function App() {
   const { theme, setTheme } = useTheme();
   const toggle = () => setTheme(theme === "light" ? "dark" : "light");
 
-  // const pdfUrl = `${import.meta.env.BASE_URL}Christopher_Mochizuki_Resume.pdf`;
+  const aboutId = "about";
+  const publicationsId = "publications";
+  const projectsId = "projects";
+  const contactId = "contact";
 
   return (
     <div className="container">
       <header className="header">
         <div className="brand">Christopher Mochizuki</div>
         <nav className="nav" aria-label="Primary">
-          <a href="#about">About</a>
-          <a href="#publications">Publications</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
+          <a href={`#${aboutId}`}>About</a>
+          <a href={`#${publicationsId}`}>Publications</a>
+          <a href={`#${projectsId}`}>Projects</a>
+          <a href={`"#${contactId}`}>Contact</a>
         </nav>
         <button
           className="toggle"
@@ -41,16 +65,11 @@ export default function App() {
 
       <main className="grid">
         {/* HERO / ABOUT */}
-        <section id="about" className="card span-6">
-          <div className="card-header">
-            <h1>Software Engineer · Data & Automation</h1>
-          </div>
-          <div
-            className="card-body scrollable"
-            role="region"
-            aria-label="About"
-            tabIndex={0}
-          >
+        <SectionCard
+          id={aboutId}
+          bodyLabel="About"
+          header={<h1>Software Engineer · Data & Automation</h1>}
+          body={
             <p>
               Experienced software engineer and data analyst with a decade of
               interdisciplinary experience spanning scientific research, data
@@ -60,84 +79,65 @@ export default function App() {
               pipelines, automating experimental processes, and developing
               scientific tools.
             </p>
-          </div>
-          <div className="card-actions">
+          }
+          actions={
             <a
               className="button"
               href={`${
                 import.meta.env.BASE_URL
               }Christopher_Mochizuki_Resume.pdf`}
-              // href="/Christopher_Mochizuki_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              // rel="noreferrer"
             >
               View Resume (PDF)
             </a>
-          </div>
-        </section>
-        {/* QUICK LINKS */}
-        <section className="card span-6">
-          <div className="card-header">
-            <h2>Selected Publications</h2>
-          </div>
-          <div
-            className="card-body scrollable"
-            role="region"
-            aria-label="Selected publications"
-            // tabIndex={0}
-          >
+          }
+          cardSpan={6}
+        />
+        {/* PUBLICATIONS */}
+        <SectionCard
+          id={publicationsId}
+          bodyLabel="Publications"
+          header={<h2>Selected publications</h2>}
+          body={
             <ul className="pubs">
-              <li className="pub-item">
-                <strong>
-                  Survey of spiking in the mouse visual system reveals
-                  functional hierarchy
-                </strong>
-                <br />
-                <span className="pub-venue">Nature</span> ·{" "}
-                <span className="pub-date">Apr 2021</span>
-              </li>
-              <li className="pub-item">
-                <strong>
-                  SHIELD: Skull-shaped hemispheric implants enabling large-scale
-                  electrophysiology datasets
-                </strong>
-                <br />
-                <span className="pub-venue">Neuron</span> ·{" "}
-                <span className="pub-date">Jul 2024</span>
-              </li>
-              <li className="pub-item">
-                <strong>
-                  Neurophysiological differentiation across mouse visual brain
-                  areas and timescales
-                </strong>
-                <br />
-                <span className="pub-venue">Front. Comp. Neurosci.</span> ·{" "}
-                <span className="pub-date">Mar 2023</span>
-              </li>
-              <li className="pub-item">
-                <strong>
-                  Learning, Motivation, and Perception in Transgenic Mouse Lines
-                </strong>
-                <br />
-                <span className="pub-venue">
-                  Front. Behav. Neurosci.
-                </span> · <span className="pub-date">Jun 2020</span>
-              </li>
-              <li className="pub-item">
-                <strong>
-                  Stimulus novelty uncovers coding diversity in visual cortical
-                  circuits
-                </strong>{" "}
-                (preprint)
-                <br />
-                <span className="pub-venue">bioRxiv</span> ·{" "}
-                <span className="pub-date">Feb 2023</span>
-              </li>
+              {[
+                [
+                  "Survey of spiking in the mouse visual system reveals functional hierarchy",
+                  "Nature",
+                  "Apr 2021",
+                ],
+                [
+                  "SHIELD: Skull-shaped hemispheric implants enabling large-scale electrophysiology datasets",
+                  "Neuron",
+                  "Jul 2024",
+                ],
+                [
+                  "Neurophysiological differentiation across mouse visual brain areas and timescales",
+                  "Front. Comp. Neurosci.",
+                  "Mar 2023",
+                ],
+                [
+                  "Learning, Motivation, and Perception in Transgenic Mouse Lines",
+                  "Front. Behav. Neurosci.",
+                  "Jun 2020",
+                ],
+                [
+                  "Stimulus novelty uncovers coding diversity in visual cortical circuits (preprint)",
+                  "bioRxiv",
+                  "Feb 2023",
+                ],
+              ].map(([title, venue, date]) => (
+                <li className="pub-item">
+                  <strong>{title}</strong>
+                  <br />
+                  <span className="pub-venue">{venue}</span> ·{" "}
+                  <span className="pub-date">{date}</span>
+                </li>
+              ))}
             </ul>
-          </div>
-
-          <div className="card-actions">
+          }
+          actions={
             <a
               className="button"
               href="https://www.researchgate.net/scientific-contributions/Chris-Mochizuki-2147168242"
@@ -146,54 +146,53 @@ export default function App() {
             >
               Additional contributions
             </a>
-          </div>
-        </section>
-
+          }
+          cardSpan={6}
+        />
         {/* PROJECTS */}
-        <section id="projects" className="card span-4">
-          <h2>Projects</h2>
-          <ul>
-            <li>
-              <a
-                href="https://github.com/mochic/mochic.github.io"
-                target="_blank"
-                rel="noreferrer"
-              >
-                mochic.github.io • Personal site PWA
-              </a>
-            </li>
-            <li>Work in progress...</li>
-          </ul>
-        </section>
-
+        <SectionCard
+          id={projectsId}
+          bodyLabel="Projects"
+          header={<h2>Projects</h2>}
+          body={
+            <ul>
+              <li>
+                <a
+                  href="https://github.com/mochic/mochic.github.io"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  mochic.github.io • Personal site PWA
+                </a>
+              </li>
+              <li>Work in progress...</li>
+            </ul>
+          }
+          cardSpan={4}
+        />
         {/* CONTACT */}
-        <section id="contact" className="card span-4">
-          <h2>Contact</h2>
-          <p>Seattle, WA · Open to full-time opportunities.</p>
-          <p>
-            <a href="mailto:mochic808@gmail.com">mochic808@gmail.com</a>
-          </p>
-        </section>
+        <SectionCard
+          id={contactId}
+          bodyLabel="Contact"
+          header={<h2>Contact</h2>}
+          body={
+            <>
+              <p>Seattle, WA · Open to full-time opportunities.</p>
+              <p>
+                <a href="mailto:mochic808@gmail.com">mochic808@gmail.com</a>
+              </p>
+            </>
+          }
+          cardSpan={4}
+        />
       </main>
-
       <footer className="footer">
         <span>© {new Date().getFullYear()} Christopher Mochizuki</span>
         <div className="social-icons">
-          <a
+          <FooterIconLink
             href="https://mochic.github.io/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Website"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 2C6.486 2 2 6.487 2 12s4.486 10 10 10 
+            label="Website"
+            pathData="M12 2C6.486 2 2 6.487 2 12s4.486 10 10 10 
              10-4.487 10-10S17.514 2 12 2zm6.93 6h-3.197a15.6 
              15.6 0 00-1.084-3.642A8.024 8.024 0 0118.93 8zM12 
              4c.846 1.163 1.5 2.994 1.773 4H10.23C10.5 6.994 
@@ -206,23 +205,11 @@ export default function App() {
              8.024 0 01-2.113 3.642A15.6 15.6 0 0015.649 16zm.637-2a15.52 
              15.52 0 000-3.966h3.516A7.964 7.964 0 0120 12c0 
              .68-.07 1.342-.198 1.983h-3.516z"
-              />
-            </svg>
-          </a>
-          <a
+          />
+          <FooterIconLink
             href="https://github.com/mochic"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="GitHub"
-          >
-            <svg
-              role="img"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill="currentColor"
-                d="M12 .297c-6.63 0-12 5.373-12 12 0 
+            label="GitHub"
+            pathData="M12 .297c-6.63 0-12 5.373-12 12 0 
           5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 
           0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61
           -.546-1.385-1.333-1.754-1.333-1.754-1.089-.744.083-.729.083-.729
@@ -236,32 +223,18 @@ export default function App() {
           5.625-5.475 5.92.43.37.823 1.096.823 2.21 
           0 1.594-.015 2.877-.015 3.27 0 .32.218.694.825.576 
           C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-              />
-            </svg>
-          </a>
-          <a
+          />
+          <FooterIconLink
             href="https://www.linkedin.com/in/christopher-mochizuki-9691267b/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="LinkedIn"
-          >
-            <svg
-              role="img"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill="currentColor"
-                d="M20.447 20.452h-3.554v-5.569c0-1.328-.025-3.037-1.852-3.037
+            label="LinkedIn"
+            pathData="M20.447 20.452h-3.554v-5.569c0-1.328-.025-3.037-1.852-3.037
           -1.853 0-2.137 1.445-2.137 2.939v5.667H9.35V9h3.414v1.561h.049
           c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.286z
           M5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124z
           M6.814 20.452H3.861V9h2.953v11.452zM22.225 0H1.771
           C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451
           C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"
-              />
-            </svg>
-          </a>
+          />
         </div>
       </footer>
     </div>
